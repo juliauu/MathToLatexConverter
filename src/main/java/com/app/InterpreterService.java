@@ -16,7 +16,7 @@ public class InterpreterService {
             Converter visitor = new Converter();
             return visitor.visit(tree);
         } catch (Exception e) {
-            return "Błąd: " + e.getMessage();
+            return e.getMessage();
         }
     }
 }
