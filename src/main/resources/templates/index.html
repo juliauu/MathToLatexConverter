@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Converter</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
+<h1>Konwerter wyrażeń matematycznych na Latex</h1>
 <div class="container">
     <form action="/interpret" method="post">
         <input type="text" name="expression" placeholder="Wpisz wyrażenie">
-        <button type="submit">Oblicz</button>
+        <button type="submit">Konwertuj na Latex</button>
     </form>
-    <div>
+    <div class="result">
         <h2>Wynik:</h2>
-        <p th:text="${result}"></p>
+        <h3 th:text="${result}"></h3>
     </div>
 </div>
 </body>
