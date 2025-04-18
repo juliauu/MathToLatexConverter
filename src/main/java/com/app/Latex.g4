@@ -5,9 +5,12 @@ prog:	stat EOF;
 stat: expr;
 
 
-expr: expr ADD expr                         
-    | INT                                   
-    | expr op=('*'|'/') expr                
+expr: INT
+    | VAR
+    | expr MUL expr
+    | expr DIV expr
+    | expr ADD expr
+    | expr SUB expr
     | expr '^' expr                         
     | constant                              
     | '(' expr ')'                          
@@ -23,6 +26,11 @@ expr: expr ADD expr
     | func '(' expr ')'                     
     ;
 
+VAR: [a-zA-Z] [a-zA-Z0-9]* ;
+
+MUL : '*' ;
+DIV : '/' ;
+SUB : '-' ;
 ADD : '+' ;
 
 func: 'sin' | 'cos' | 'tan' | 'sinh' | 'cosh' | 'tanh' | 'exp' | 'gcd' | 'lfloor' | 'lceil';
