@@ -4,30 +4,28 @@ prog:	stat EOF;
 
 stat: expr;
 
-
-expr: INT
+expr:
+     expr (MUL|DIV) expr
+    | expr (ADD|SUB) expr
+    | expr '^' expr
+    | constant
+    | NUMBER
+    | '(' expr ')'
+    | '√' expr
+    | expr '!'
+    | 'Σ' '(' expr ',' expr ',' expr ')'
+    | '∫' '(' expr ',' expr ',' expr ')'
+    | '∏' '(' expr ',' expr ')'
+    | '|' expr '|'
+    | 'frac' '(' expr ',' expr ')'
+    | 'mod' '(' expr ',' expr ')'
+    | 'matrix' '(' matrixContent ')'
+    | func '(' expr ')'
     | VAR
-    | expr MUL expr
-    | expr DIV expr
-    | expr ADD expr
-    | expr SUB expr
-    | expr '^' expr                         
-    | constant                              
-    | '(' expr ')'                          
-    | '√' expr                              
-    | expr '!'                              
-    | 'Σ' '(' expr ',' expr ',' expr ')'    
-    | '∫' '(' expr ',' expr ',' expr ')'    
-    | '∏' '(' expr ',' expr ')'             
-    | '|' expr '|'                          
-    | 'frac' '(' expr ',' expr ')'          
-    | 'mod' '(' expr ',' expr ')'           
-    | 'matrix' '(' matrixContent ')'        
-    | func '(' expr ')'                     
     ;
 
 VAR: [a-zA-Z] [a-zA-Z0-9]* ;
-
+NUMBER: [0-9]+ ('.' [0-9]+)? ;
 MUL : '*' ;
 DIV : '/' ;
 SUB : '-' ;
@@ -38,6 +36,5 @@ constant: 'π' | 'e' | 'Ω';
 matrixContent: '[' row (',' row)* ']';
 row: '[' expr (',' expr)* ']';
 
-INT     : [0-9]+ ;
-WS: [ \t\r\n]+ -> skip;  
+WS: [ \t\r\n]+ -> skip;
 
