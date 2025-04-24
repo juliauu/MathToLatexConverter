@@ -12,14 +12,31 @@
 <body>
 <h1>Konwerter wyrażeń matematycznych na Latex</h1>
 <div class="container">
-    <form action="/interpret" method="post">
-        <input type="text" name="expression" placeholder="Wpisz wyrażenie">
-        <button type="submit">Konwertuj na Latex</button>
-    </form>
-    <div class="result">
-        <h2>Wynik:</h2>
-        <h3 th:text="${result}"></h3>
+    <div class="items">
+        <form action="/interpret" method="post">
+            <input type="text" name="expression" placeholder="Wpisz wyrażenie">
+            <button class="submit-btn" type="submit">Konwertuj na Latex</button>
+        </form>
+        <div class="keyboard">
+            <button class="key" onclick="handleClick('√')">√</button>
+            <button class="key" onclick="handleClick('π')">π</button>
+            <button class="key" onclick="handleClick('Ω')">Ω</button>
+            <button class="key" onclick="handleClick('Σ')">Σ</button>
+            <button class="key" onclick="handleClick('∫')">∫</button>
+            <button class="key" onclick="handleClick('∏')">∏</button>
+        </div>
+        <div class="result">
+            <h2>Wynik:</h2>
+            <h3 th:text="${result}"></h3>
+        </div>
     </div>
 </div>
+<script>
+    function handleClick(key)
+    {
+        const input = document.getElementsByTagName("input")[0];
+        input.value+=key;
+    }
+</script>
 </body>
 </html>
