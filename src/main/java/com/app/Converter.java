@@ -58,6 +58,13 @@ public class Converter extends LatexBaseVisitor<String> {
 
             return base + "^" + exponent;
         }
+        // Obsługa indeksów dolnych (np. x_1)
+        if (ctx.getChildCount() == 3 && "_".equals(ctx.getChild(1).getText())) {
+            String base = visit(ctx.expr(0)); // Podstawa 
+            String subscript = visit(ctx.expr(1));  // Indeks dolny
+
+            return base + "_" + subscript;
+        }
         if (ctx.getChildCount() == 2 && ctx.getChild(0).getText().equals("√")) {
             String inner = visit(ctx.expr(0));
 
@@ -111,7 +118,64 @@ public class Converter extends LatexBaseVisitor<String> {
 
             return innerExpr + "!";
         }
+        // Obsługa sumy (Σ)
+        if (ctx.getChild(0).getText().equals("Σ")) {
+            String start = visit(ctx.expr(0)); // Pierwszy argument sumy
+            String end = visit(ctx.expr(1));   // Drugi argument sumy
+            String step = visit(ctx.expr(2));  // Krok sumy
+
+            return "\\sum_{" + start + "}^{" + end + "} " + step;
+        }
+
+        // Obsługa całki (∫)
+        if (ctx.getChild(0).getText().equals("∫")) {
+            String lower = visit(ctx.expr(0)); // Dolna granica całkowania
+            String upper = visit(ctx.expr(1)); // Górna granica całkowania
+            String integrand = visit(ctx.expr(2)); // Wyrażenie całkowane
+
+            return "\\int_{" + lower + "}^{" + upper + "} " + integrand + " \\, dx";
+        }
+
+        // Obsługa iloczynu (∏)
+        if (ctx.getChild(0).getText().equals("∏")) {
+            String start = visit(ctx.expr(0)); // Pierwszy argument iloczynu
+            String end = visit(ctx.expr(1));   // Drugi argument iloczynu
+
+            return "\\prod_{" + start + "}^{" + end + "}";
+        }
+        // Obsługa macierzy
+        if (ctx.getChild(0).getText().equals("matrix")) {
+            String matrixContent = visit(ctx.matrixContent());
+            return "\\begin{bmatrix} " + matrixContent + " \\end{bmatrix}";
+        }
         return "";
+    }
+
+    @Override
+    public String visitMatrixContent(LatexParser.MatrixContentContext ctx) {
+        StringBuilder builder = new StringBuilder();
+        for (LatexParser.RowContext row : ctx.row()) {
+            builder.append(visit(row));
+            builder.append(" \\\\ ");
+        }
+        return builder.toString().trim();
+    }
+
+    @Override
+    public String visitRow(LatexParser.RowContext ctx) {
+        StringBuilder builder = new StringBuilder();
+        for (LatexParser.ExprContext expr : ctx.expr()) {
+        String cell = visit(expr);
+        
+        // Dodajemy kropki, jeśli element jest pusty
+        if (cell.isEmpty()) {
+            cell = ".";
+        }
+
+        builder.append(cell);
+        builder.append(" & ");
+    }
+        return builder.toString().substring(0, builder.length() - 2); // Usuń ostatnie "&"
     }
 }
 
