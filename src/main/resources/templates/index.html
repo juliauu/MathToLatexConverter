@@ -17,13 +17,8 @@
             <input type="text" name="expression" placeholder="Wpisz wyrażenie">
             <button class="submit-btn" type="submit">Konwertuj na Latex</button>
         </form>
-        <div class="keyboard">
-            <button class="key" onclick="handleClick('√')">√</button>
-            <button class="key" onclick="handleClick('π')">π</button>
-            <button class="key" onclick="handleClick('Ω')">Ω</button>
-            <button class="key" onclick="handleClick('Σ')">Σ</button>
-            <button class="key" onclick="handleClick('∫')">∫</button>
-            <button class="key" onclick="handleClick('∏')">∏</button>
+        <div class="keyboard"  id="keyboard">
+
         </div>
         <div class="result">
             <h2>Wynik:</h2>
@@ -32,11 +27,36 @@
     </div>
 </div>
 <script>
+    const greekLetters = [
+        'α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', 'θ', 'ι', 'κ', 'λ', 'μ', 'ν', 'ξ', 'ο', 'π', 'ρ', 'σ', 'τ', 'υ', 'φ', 'χ', 'ψ', 'ω',
+        'Α', 'Β', 'Γ', 'Δ', 'Ε', 'Ζ', 'Η', 'Θ', 'Ι', 'Κ', 'Λ', 'Μ', 'Ν', 'Ξ', 'Ο', 'Π', 'Ρ', 'Σ', 'Τ', 'Υ', 'Φ', 'Χ', 'Ψ', 'Ω',
+
+    ];
+    const symbols=['√', '∫', '∏'];
+    function createKeyboard() {
+        const keyboard = document.getElementById("keyboard");
+        greekLetters.forEach(letter => {
+            const button = document.createElement("button");
+            button.classList.add("key");
+            button.textContent = letter;
+            button.onclick = () => handleClick(letter);
+            keyboard.appendChild(button);
+        });
+        symbols.forEach(symbol => {
+            const button = document.createElement("button");
+            button.classList.add("key");
+            button.textContent = symbol;
+            button.onclick = () => handleClick(symbol);
+            keyboard.appendChild(button);
+        });
+    }
     function handleClick(key)
     {
         const input = document.getElementsByTagName("input")[0];
         input.value+=key;
     }
+
+    createKeyboard();
 </script>
 </body>
 </html>
