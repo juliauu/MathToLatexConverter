@@ -13,9 +13,9 @@ expr:
     | '(' expr ')'
     | '√' expr
     | expr '!'
-    | 'Σ' '(' expr ',' expr ',' expr ')'
-    | '∫' '(' expr ',' expr ',' expr ')'
-    | '∏' '(' expr ',' expr ')'
+    | '\u03A3' '(' expr ',' expr ',' expr ')' //Σ
+    | '\u222B' '(' expr ',' expr ',' expr ')' //∫
+    | '\u220F' '(' expr ',' expr ')' //∏
     | '|' expr '|'
     | 'frac' '(' expr ',' expr ')'
     | 'mod' '(' expr ',' expr ')'
@@ -32,7 +32,7 @@ SUB : '-' ;
 ADD : '+' ;
 
 func: 'sin' | 'cos' | 'tan' | 'sinh' | 'cosh' | 'tanh' | 'exp' | 'gcd' | 'lfloor' | 'lceil';
-constant: '\u03C0' | 'e' | '\u03A9';
+constant: '\u03C0' | 'e' | '\u03A9'; //constant: 'π' | 'e' | 'Ω';
 matrixContent: '[' row (',' row)* ']';
 row: '[' expr (',' expr)* ']';
 
