@@ -32,7 +32,7 @@ SUB : '-' ;
 ADD : '+' ;
 
 func: 'sin' | 'cos' | 'tan' | 'sinh' | 'cosh' | 'tanh' | 'exp' | 'gcd' | 'lfloor' | 'lceil';
-constant: 'π' | 'e' | 'Ω';
+constant: '\u03C0' | 'e' | '\u03A9';
 matrixContent: '[' row (',' row)* ']';
 row: '[' expr (',' expr)* ']';
 
