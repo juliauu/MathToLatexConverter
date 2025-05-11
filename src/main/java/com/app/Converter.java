@@ -97,8 +97,54 @@ public class Converter extends LatexBaseVisitor<String> {
         // --- Stałe ---
         if (ctx.constant() != null) {
             switch (ctx.constant().getText()) {
-                case "π": return "\\pi";
                 case "e": return "e";         // W LaTeX nie trzeba specjalnie formatować 'e'
+                case "α": return "\\alpha";
+                case "β": return "\\beta";
+                case "γ": return "\\gamma";
+                case "δ": return "\\delta";
+                case "ε": return "\\epsilon";
+                case "ζ": return "\\zeta";
+                case "η": return "\\eta";
+                case "θ": return "\\theta";
+                case "ι": return "\\iota";
+                case "κ": return "\\kappa";
+                case "λ": return "\\lambda";
+                case "μ": return "\\mu";
+                case "ν": return "\\nu";
+                case "ξ": return "\\xi";
+                case "ο": return "o";
+                case "π": return "\\pi";
+                case "ρ": return "\\rho";
+                case "σ": return "\\sigma";
+                case "τ": return "\\tau";
+                case "υ": return "\\upsilon";
+                case "φ": return "\\phi";
+                case "χ": return "\\chi";
+                case "ψ": return "\\psi";
+                case "ω": return "\\omega";
+                case "Α": return "A";
+                case "Β": return "B";
+                case "Γ": return "\\Gamma";
+                case "Δ": return "\\Delta";
+                case "Ε": return "E";
+                case "Ζ": return "Z";
+                case "Η": return "H";
+                case "Θ": return "\\Theta";
+                case "Ι": return "I";
+                case "Κ": return "K";
+                case "Λ": return "\\Lambda";
+                case "Μ": return "M";
+                case "Ν": return "N";
+                case "Ξ": return "\\Xi";
+                case "Ο": return "O";
+                case "Π": return "\\Pi";
+                case "Ρ": return "P";
+                case "Σ": return "\\Sigma";
+                case "Τ": return "T";
+                case "Υ": return "\\Upsilon";
+                case "Φ": return "\\Phi";
+                case "Χ": return "X";
+                case "Ψ": return "\\Psi";
                 case "Ω": return "\\Omega";
             }
         }
