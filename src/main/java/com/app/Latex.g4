@@ -85,7 +85,8 @@ constant:
     | '\u03A9' // Ω
 ;
 matrixContent: '[' row (',' row)* ']';
-row: '[' expr (',' expr)* ']';
+row: '[' cell (',' cell)* ']';
+cell: expr?;
 
 WS: [ \t\r\n]+ -> skip;
 

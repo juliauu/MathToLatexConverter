@@ -217,17 +217,15 @@ public class Converter extends LatexBaseVisitor<String> {
     @Override
     public String visitRow(LatexParser.RowContext ctx) {
         StringBuilder builder = new StringBuilder();
-        for (LatexParser.ExprContext expr : ctx.expr()) {
-        String cell = visit(expr);
-        
-        // Dodajemy kropki, jeśli element jest pusty
-        if (cell.isEmpty()) {
-            cell = ".";
+        for (LatexParser.CellContext cellCtx : ctx.cell()) {
+            String cell;
+            if (cellCtx.expr() == null) {
+                cell = "\\cdots";
+            } else {
+                cell = visit(cellCtx.expr());
+            }
+            builder.append(cell).append(" & ");
         }
-
-        builder.append(cell);
-        builder.append(" & ");
-    }
         return builder.toString().substring(0, builder.length() - 2); // Usuń ostatnie "&"
     }
 }
