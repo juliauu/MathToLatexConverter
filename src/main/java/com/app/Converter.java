@@ -148,6 +148,13 @@ public class Converter extends LatexBaseVisitor<String> {
                 case "Ω": return "\\Omega";
             }
         }
+        if (ctx.getChild(0).getText().equals("frac")) {
+            return "\\frac{" + visit(ctx.expr(0)) + "}{" + visit(ctx.expr(1)) + "}";
+        }
+
+        if (ctx.getChild(0).getText().equals("mod")) {
+            return visit(ctx.expr(0)) + " \\bmod " + visit(ctx.expr(1));
+        }
         // Obsługa wartości bezwzględnej (| expr |)
         if (ctx.getChildCount() == 3 && ctx.getChild(0).getText().equals("|") && ctx.getChild(2).getText().equals("|")) {
             String innerExpr = visit(ctx.expr(0));

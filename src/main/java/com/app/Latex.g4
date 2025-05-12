@@ -8,6 +8,7 @@ expr:
      expr (MUL|DIV) expr
     | expr (ADD|SUB) expr
     | expr '^' expr
+    | expr '_' expr
     | constant
     | NUMBER
     | '(' expr ')'
