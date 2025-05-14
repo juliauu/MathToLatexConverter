@@ -96,6 +96,18 @@ public class LatexBaseListener implements LatexListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRow(LatexParser.RowContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCell(LatexParser.CellContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCell(LatexParser.CellContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

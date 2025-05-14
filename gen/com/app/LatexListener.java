@@ -77,4 +77,14 @@ public interface LatexListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRow(LatexParser.RowContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatexParser#cell}.
+	 * @param ctx the parse tree
+	 */
+	void enterCell(LatexParser.CellContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatexParser#cell}.
+	 * @param ctx the parse tree
+	 */
+	void exitCell(LatexParser.CellContext ctx);
 }

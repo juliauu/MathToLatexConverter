@@ -62,7 +62,9 @@ public class Converter extends LatexBaseVisitor<String> {
         if (ctx.getChildCount() == 3 && "_".equals(ctx.getChild(1).getText())) {
             String base = visit(ctx.expr(0)); // Podstawa 
             String subscript = visit(ctx.expr(1));  // Indeks dolny
-
+            if (ctx.expr(1).getChildCount() > 1) {
+                subscript = "{" + subscript + "}";
+            }
             return base + "_" + subscript;
         }
         if (ctx.getChildCount() == 2 && ctx.getChild(0).getText().equals("√")) {

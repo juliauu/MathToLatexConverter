@@ -52,4 +52,10 @@ public interface LatexVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRow(LatexParser.RowContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LatexParser#cell}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCell(LatexParser.CellContext ctx);
 }
