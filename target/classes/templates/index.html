@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+<h1>Konwerter wyrażeń matematycznych na Latex</h1>
+<div class="container">
+    <div class="items">
+        <form action="/interpret" method="post">
+            <input type="text" name="expression" placeholder="Wpisz wyrażenie">
+            <button class="submit-btn" type="submit">Konwertuj na Latex</button>
+        </form>
+        <div class="keyboard"  id="keyboard">
+
+        </div>
+        <div class="result">
+            <h2>Wynik:</h2>
+            <h3 th:text="${result}"></h3>
+        </div>
+    </div>
+</div>
+<script>
+    const greekLetters = [
+        'α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', 'θ', 'ι', 'κ', 'λ', 'μ', 'ν', 'ξ', 'ο', 'π', 'ρ', 'σ', 'τ', 'υ', 'φ', 'χ', 'ψ', 'ω',
+        'Α', 'Β', 'Γ', 'Δ', 'Ε', 'Ζ', 'Η', 'Θ', 'Ι', 'Κ', 'Λ', 'Μ', 'Ν', 'Ξ', 'Ο', 'Π', 'Ρ', 'Σ', 'Τ', 'Υ', 'Φ', 'Χ', 'Ψ', 'Ω',
+
+    ];
+    const symbols=['√', '∫', '∏'];
+    function createKeyboard() {
+        const keyboard = document.getElementById("keyboard");
+        greekLetters.forEach(letter => {
+            const button = document.createElement("button");
+            button.classList.add("key");
+            button.textContent = letter;
+            button.onclick = () => handleClick(letter);
+            keyboard.appendChild(button);
+        });
+        symbols.forEach(symbol => {
+            const button = document.createElement("button");
+            button.classList.add("key");
+            button.textContent = symbol;
+            button.onclick = () => handleClick(symbol);
+            keyboard.appendChild(button);
+        });
+    }
+    function handleClick(key)
+    {
+        const input = document.getElementsByTagName("input")[0];
+        input.value+=key;
+    }
+
+    createKeyboard();
+</script>
+</body>
+</html>
